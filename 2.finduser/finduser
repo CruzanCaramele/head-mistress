@@ -1,0 +1,4 @@
+#!/bin/sh -
+
+# get the username input from the terminal
+who | grep $1
