@@ -1,0 +1,18 @@
+#!/bin/bash
+# this script ensures user input comprises alphabetic
+# and numeric characters
+
+validateAlphaNum()
+{
+	# validate arg: returns 0 if all upper+lower+numeric;m1 otherwise
+
+	# Remove all unacceptable characters
+
+	validchars = "$(echo $1 | sed -e 's/[^[:alnum:]]/g')"
+
+	if [ "$validchars" = "$1" ] ; then
+		return 0
+	else
+		return 1
+	fi
+}
