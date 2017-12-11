@@ -6,14 +6,18 @@ in_path()
 {
 	# Given a command and the PATH, tries to find the command.
 	# Returns 0 if found and executable; 1 if not. IFS is 
-	# temporarily modified (internal fiels seperator)
-	cmd=$1	ourpath=$2	result=1
-	oldIFS=$IFS  IFS=":"
+	# temporarily modified (internal field seperator)
+	command=$1	
+	suppliedpath=$2
+	result=1
+	oldIFS=$IFS
+	IFS=":"
 
-	for directory in "$ourpath"
+	for path in $suppliedpath
 	do
-		if [ -x $directory/$cmd ] ; then # check if it exists
-			result = 0 # if we arrive here, command is found.
+		if [ -x $path/$command ] ; then  # check if command exits and executable
+			result=0
+			
 		fi
 	done
 
@@ -27,17 +31,18 @@ chkForCmdInPath()
 	# a single command like echo or a full given path such as
 	# /bin/echo.
 
-	var=$1
+	variable=$1
 
-	if [ "$var" != "" ] ; then
-		if [ "${var:0:1}" = "/" ] ; then # examine 1st character of variable.
-			if [ ! -x "$var" ] ; then  # check if path exists.
+	if [ "$variable" != " " ] ; then
+		if [ "${variable:0:1}" = "/" ] ; then
+			if [ ! -x $variable ] ; then
 				return 1
 			fi
-		elif ! in_path $var "$PATH" ; then # pass the value to in_path checking default PATH.
+		elif ! in_path $variable "$PATH" ; then
 			return 2
 		fi
-	fi
+	fi 
+
 }
 
 if [ $# -ne 1 ] ; then
