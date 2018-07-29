@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# directory
+dir=$1
+
+# number of items to be shown
+items=$2
+
+# check for integers
+re='^[0-9]+$'
+
+if [[ "$#" -ne 2 ]] || [[ !  "$items" =~ $re ]]; then
+  echo "Usage: large directory num-of-files" >&2
+  exit 1
+
+elif [[ -n "$dir" && "$items" =~ $re ]]; then
+  du -h /$dir/* | sort -rh | head -$items
+fi
