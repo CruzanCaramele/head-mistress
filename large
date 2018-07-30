@@ -16,3 +16,6 @@ if [[ "$#" -ne 2 ]] || [[ !  "$items" =~ $re ]]; then
 elif [[ -n "$dir" && "$items" =~ $re ]]; then
   du -h /$dir/* | sort -rh | head -$items
 fi
+
+
+# example: large var 20 --> this will show the largest 20 items in the var directory
